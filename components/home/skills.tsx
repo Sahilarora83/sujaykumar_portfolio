@@ -51,8 +51,8 @@ const SkillsSection = () => {
       <p className="section-title-sm seq">SKILLS</p>
       <h1 className="section-heading seq mt-2">My Skills</h1>
       <h2 className="text-2xl md:max-w-2xl w-full seq mt-2">
-        I like to take responsibility to craft aesthetic user experience using
-        modern frontend architecture.{" "}
+        I like to take responsibility to manage projects and coordinate
+        innovative initiatives.{" "}
       </h2>
     </div>
   );
@@ -83,27 +83,47 @@ const SkillsSection = () => {
   const renderSkillColumn = (
     title: string,
     skills: string[]
-  ): React.ReactNode => (
-    <>
-      <h3 className={SKILL_STYLES.SKILL_TITLE}>{title}</h3>
-      <div
-        className={`flex flex-wrap seq ${
-          willChange ? "will-change-opacity" : ""
-        }`}
-      >
-        {skills.map((skill) => (
-          <Image
-            key={skill}
-            src={`/skills/${skill}.svg`}
-            alt={skill}
-            width={76}
-            height={76}
-            className="skill"
-          />
-        ))}
-      </div>
-    </>
-  );
+  ): React.ReactNode => {
+    const existingSkills = [
+      "css",
+      "gsap",
+      "html",
+      "next",
+      "react",
+      "redux",
+      "sass",
+      "svg",
+      "tailwind",
+      "webpack",
+      "canva",
+      "python",
+      "cpp",
+    ];
+
+    return (
+      <>
+        <h3 className={SKILL_STYLES.SKILL_TITLE}>{title}</h3>
+        <div
+          className={`flex flex-wrap seq ${
+            willChange ? "will-change-opacity" : ""
+          }`}
+        >
+          {skills
+            .filter((skill) => existingSkills.includes(skill))
+            .map((skill) => (
+              <Image
+                key={skill}
+                src={`/skills/${skill}.svg`}
+                alt={skill}
+                width={76}
+                height={76}
+                className="skill"
+              />
+            ))}
+        </div>
+      </>
+    );
+  };
 
   return (
     <section className="relative">
@@ -116,16 +136,16 @@ const SkillsSection = () => {
         <div className="flex flex-col skills-wrapper">
           {renderSectionTitle()}
           <div className="mt-10">
-            {renderSkillColumn("FRONTEND DEVELOPMENT", SKILLS.frontend)}
+            {renderSkillColumn("PROJECT MANAGEMENT & LEADERSHIP", (SKILLS as any).management)}
           </div>
           <div className="flex flex-wrap mt-10">
             <div className="mr-6 mb-6">
               {renderSkillColumn(
-                "User Interface, User Experience Design",
-                SKILLS.userInterface
+                "DESIGN & CONTENT",
+                (SKILLS as any).design
               )}
             </div>
-            <div>{renderSkillColumn("Other Skills", SKILLS.other)}</div>
+            <div>{renderSkillColumn("TECHNICAL SKILLS & TOOLS", SKILLS.other)}</div>
           </div>
         </div>
       </div>

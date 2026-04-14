@@ -54,10 +54,17 @@ const HeroSection = React.memo(() => {
   };
 
   useEffect(() => {
-    const typed = initTypeAnimation(typedSpanElement);
+    let typed: Typed | null = null;
+    if (typedSpanElement.current) {
+      typed = initTypeAnimation(typedSpanElement);
+    }
     initRevealAnimation(targetSection);
 
-    return typed.destroy;
+    return () => {
+      if (typed) {
+        typed.destroy();
+      }
+    };
   }, [typedSpanElement, targetSection]);
 
   const renderBackgroundImage = (): React.ReactNode => (
@@ -67,7 +74,7 @@ const HeroSection = React.memo(() => {
   );
 
   const renderSocialLinks = (): React.ReactNode =>
-    Object.keys(SOCIAL_LINKS).map((el: keyof typeof SOCIAL_LINKS) => (
+    (Object.keys(SOCIAL_LINKS) as Array<keyof typeof SOCIAL_LINKS>).map((el) => (
       <a
         href={SOCIAL_LINKS[el]}
         key={el}
@@ -83,7 +90,7 @@ const HeroSection = React.memo(() => {
     <div className={HERO_STYLES.CONTENT}>
       <div className="md:mb-4 mb-2">
         <h2 className="text-4xl seq">Hello 👋🏻</h2>
-        <h1 className="text-3xl seq">I am Ayush Singh</h1>
+        <h1 className="text-3xl seq">I am Sujay Kumar</h1>
       </div>
       <p className="mb-4">
         <span className={HERO_STYLES.TYPED_SPAN} ref={typedSpanElement}></span>
@@ -98,13 +105,13 @@ const HeroSection = React.memo(() => {
             target: "_blank",
             rel: "noreferrer",
           }}
-          href="/Ayush_Resume.pdf"
+          href="/Sujay_Kumar_Resume.pdf"
         ></Button>
         <Button
           classes="ml-3"
           type={ButtonTypes.PRIMARY}
           name="Let's Talk"
-          href={SOCIAL_LINKS.topmate}
+          href={`mailto:${EMAIL}`}
           otherProps={{
             target: "_blank",
             rel: "noreferrer",
@@ -129,6 +136,6 @@ const HeroSection = React.memo(() => {
   );
 });
 
-HeroSection.displayName = "LandingHero";
+HeroSection.displayName = "HeroSection";
 
 export default HeroSection;

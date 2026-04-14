@@ -69,16 +69,17 @@ const AboutSection = () => {
           willChange ? "will-change-opacity" : ""
         }`}
       >
-        I am a passionate UI Engineer who bridges the gap between development
-        and design.{" "}
+        I am a results-driven Project Manager and Team Lead with 2+ years of
+        experience in coordinating cross-functional teams and driving innovation.{" "}
       </span>
       <span
         className={`about-2 leading-tight ${
           willChange ? "will-change-opacity" : ""
         }`}
       >
-        I take responsibility to craft a good user experience using modern
-        frontend architecture.
+        As Student President at DU-SOL and IIC Innovator Coordinator, I have led
+        100+ member organizations and mentored 50+ students in technical skills
+        and AI-based tools.
       </span>
     </h1>
   );
